@@ -1,0 +1,4 @@
+RewriteEngine On
+RewriteRule ^category/(.+)$ http://localhost [R=301,L]
+
+Options -Indexes
