@@ -92,5 +92,100 @@ $result3 = mysqli_query($db, $products);
 				
 			?>
 		</table>
+		<h3>Cards</h3>
+        <table class="table table-bordered" cellpadding="10" cellspacing="1">
+            <tbody>
+                <tr>
+                    <th style="text-align:center;" width="5%">ID</th>
+                    <th style="text-align:center;" width="20%">Info</th>
+                    <th style="text-align:center;" width="30%">Number</th>
+                    <th style="text-align:center;" width="10%">Value</th>
+                    <th style="text-align:center;" width="10%">State</th>
+                    <th style="text-align:center;" width="5%">Action</th>
+                </tr>	
+			<?php
+				while ($card = mysqli_fetch_assoc($result2)) {
+					
+			?>
+				<tr>
+					<td><?php echo $card['id'] ?></td>
+					<td><?php echo $card['info'] ?></td>
+					<td><?php echo $card['cardnumber'] ?></td>
+					<td><?php echo $card['cardvalue'] ?></td>
+					<form action='admin.php' method='post'>
+						<td><input name='state' value="<?php echo $card['state'] ?>"></td>
+						<input type='hidden' name='cardid' value="<?php echo $card['id'] ?>">
+						<td>
+							<button type='submit' name='updatecard'>update</button>
+							
+						</td>
+					</form>
+				</tr>
+			<?php
+					
+				}
 
+				if (isset($_POST['updatecard'])) {
+					$cardid = $_REQUEST['cardid'];
+					$state = $_POST['state'];
+					$query4 = "UPDATE card SET state = '$state' WHERE id = '$cardid'";
+    				mysqli_query($db, $query4);	
+								
+				}
+				
+			?>
+		</table>
+
+		<h3>Products</h3>
+        <table class="table table-bordered" cellpadding="10" cellspacing="1">
+            <tbody>
+                <tr>
+                    <th style="text-align:center;" width="5%">ID</th>
+                    <th style="text-align:center;" width="20%">Name</th>
+                    <th style="text-align:center;" width="30%">Code</th>
+                    <th style="text-align:center;" width="10%">Price</th>
+                    <th style="text-align:center;" width="10%">Amount</th>
+                    <th style="text-align:center;" width="5%">Action</th>
+                </tr>	
+			<?php
+				while ($product = mysqli_fetch_assoc($result3)) {
+					
+			?>
+				<tr>
+					<td><?php echo $product['id'] ?></td>
+					<td><?php echo $product['name'] ?></td>
+					<td><?php echo $product['code'] ?></td>
+					<form action='admin.php' method='post'>
+						<td><input name='price' value="<?php echo $product['price'] ?>"></td>
+						<td><input name='amount' value="<?php echo $product['amount'] ?>"></td>
+						<input type='hidden' name='productid' value="<?php echo $product['id'] ?>">
+						<td>
+							<button type='submit' name='updateproduct'>update</button>
+							
+						</td>
+					</form>
+				</tr>
+			<?php
+					
+				}
+				
+				if (isset($_POST['updateproduct'])) {
+					$productid = $_REQUEST['productid'];
+					$price = $_POST['price'];
+					$amount = $_POST['amount'];
+
+					$query6 = "UPDATE products SET price = '$price' WHERE id = '$productid'";
+    				mysqli_query($db, $query6);
+					$query7 = "UPDATE products SET amount = '$amount' WHERE id = '$productid'";
+    				mysqli_query($db, $query7);
+					
+				}
+				
+			?>
+		</table>
+
+
+</body>
+</html>
+		
 		
