@@ -33,5 +33,46 @@ if (isset($_POST['clear'])) {
     header("location: test.php");
 }
 
+?>
+
+
+<html>
+<head>
+    <title>test</title>
+	<link rel="stylesheet" type="text/css" href="/css/chat.css">
+</head>
+<body>
+    <div class="chat-container">
+    <div class="chat-header">
+        <h2>Chat</h2>
+    </div>
+    <div class="chat-input">
+        <form action="test.php" method="post">
+        <input type="text" name="message" placeholder="Type a message">
+        <button type="submit">Send</button>
+        <button type="submit" name="clear">Clear All Messages</button>
+        
+     
+        </form>
+        <button onclick="location.href='test2.php'" >Search</button>
+    </div>
+    <div class="chat-messages">
+        <?php
+        $sql = "SELECT * FROM messages ORDER BY time DESC";
+        $result = mysqli_query($db, $sql);
+        if (mysqli_num_rows($result) > 0) {
+            while ($row = mysqli_fetch_assoc($result)) {
+            echo '<div class="message">';
+            echo '<p>' . $row['user'] . ': ' . $row['message'] . '</p>';
+            echo '<p class="timestamp">' . $row['time'] . '</p>';
+            echo '</div>';
+            }
+        }
+
+        ?>
+    </div>
+    </div>
+</body>
+</html>
 
 
