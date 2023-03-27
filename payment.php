@@ -51,5 +51,61 @@ if (isset($_POST['pay'])) {
     header('location:index.php');
 }
 
-
+?>
+<!DOCTYPE html>
+<html>
+<head>
+    <?php include('navbar.php') ?>
+    <title>Payment</title>
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+</head>
+<body>
+    <div class="header">
+  	    <h2>Payment</h2>
+    </div>
+   
+    
+    <form method="post" action="payment.php">
+        <?php  if (isset($_SESSION['username'])) : ?>
+            <p>
+                Welcome 
+                <b><?php echo $user['username']; ?></b>
+            </p>
+            <p>
+                You are: 
+                <b><?php echo $user['role']?> </b>
+            </p>	
+            <p>
+                Your balance is: 
+                <b><?php echo $user['balance']; ?> </b> banana(s)
+            </p>
+            
+            <b style="color:red"> Discount: 
+                <b style="color:red">
+                    <?php 
+                    echo $discount;
+                    ?> %
+                </b>
+            </b>
+            
+            <p>
+                You need to pay: 
+                <b style="color:red">
+                <?php 
+                    $pay = $_SESSION['price'] - $_SESSION['price']*$discount/100; 
+                    echo $pay;
+                ?> 
+                </b> banana(s)
+            </p>
+            <div class="input-group">
+                <button type="submit" class="btn" name="pay">Pay</button>
+            </div>
+        <?php endif ?>
+        
+    </form>
+   
+    
+</body>
+</html>
+Đang hiển thị 6653157311308555342.
 
