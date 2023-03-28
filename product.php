@@ -1,7 +1,7 @@
 
 <?php
 include("server.php");
-$db_handle = new DBControler();
+$db_handle = new DBController();
 if(!empty($_GET["action"])) {
     switch($_GET["action"]) {
         case "add":
